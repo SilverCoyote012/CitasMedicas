@@ -45,6 +45,7 @@ def on_register_click(page: ft.Page, username, password, password_confirm):
                 cursor.execute(consulta, (username, password, 'Paciente'))
                 conexion.commit()
                 print("Usuario registrado")
+                mainPage(page)
         else:
             print("Las contraseñas no coinciden")
     else:
@@ -82,18 +83,157 @@ def registerPage(page: ft.Page):
     ]
     page.update()
 
+def agregarDoctor(page: ft.Page):
+    page.controls[0].controls[2].controls = [
+        ft.Text("Agregar Doctor", size=20),
+        ft.TextField(label="Nombre", width=500),
+        ft.TextField(label="Apellido", width=500),
+        ft.TextField(label="Teléfono", width=500),
+        ft.TextField(label="Especialidad", width=500),
+
+        ft.TextField(label="Calle", width=500),
+        ft.TextField(label="Número", width=500),
+        ft.TextField(label="Codigo Postal", width=500),
+        ft.TextField(label="Colonia", width=500),
+        ft.TextField(label="Ciudad", width=500),
+        ft.TextField(label="Estado", width=500),
+        ft.TextField(label="País", width=500),
+        ft.ElevatedButton(
+            text="Agregar Doctor",
+            on_click=lambda e: menuAdmin(page)
+
+        ),
+    ]
+    page.update()
+
+# Crear una dataTable para mostrar los doctores registrados en la base de datos y mover la tabla con un botón hacia arriba y hacia abajo y un TextField para buscar doctores por nombre
+# def eliminarDoctor(page: ft.Page):
+#     page.controls[0].controls[2].controls = [
+#         ft.Text("Eliminar Doctor", size=20),
+#         ft.TextField(label="Nombre", width=500),
+#         ft.DataTable(
+#             columns=[
+#                 ft.DataColumn(ft.Text("Nombre")),
+#                 ft.DataColumn(ft.Text("Apellido")),
+#                 ft.DataColumn(ft.Text("Especialidad")),
+#                 ft.DataColumn(ft.Text("Teléfono")),
+#             ],
+#             rows=[
+#                 ft.DataRow(
+#                     cells=[
+#                         ft.Text("Juan"),
+#                         ft.Text("Perez"),
+#                         ft.Text("Cardiología"),
+#                         ft.Text("1234567890"),
+#                     ],
+#                 ),
+#                 ft.DataRow(
+#                     cells=[
+#                         ft.Text("Maria"),
+#                         ft.Text("Gonzalez"),
+#                         ft.Text("Pediatría"),
+#                         ft.Text("0987654321"),
+#                     ],
+#                 ),
+#                 ft.DataRow(
+#                     cells=[
+#                         ft.Text("Carlos"),
+#                         ft.Text("Hernandez"),
+#                         ft.Text("Dermatología"),
+#                         ft.Text("6789012345"),
+#                     ],
+#                 ),
+#                 ft.DataRow(
+#                     cells=[
+#                         ft.Text("Ana"),
+#                         ft.Text("Ramirez"),
+#                         ft.Text("Oftalmología"),
+#                         ft.Text("4567890123"),
+#                     ],
+#                 ),
+#             ],
+#         ),
+#         ft.ElevatedButton(
+#             text="Eliminar Doctor",
+#             on_click=lambda e: menuAdmin(page)
+#         ),
+#     ]
+#     page.update()
+
+
 def menuAdmin(page: ft.Page):
     page.title = "Menu Admin"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
+    agregarDoctorButton = ft.ElevatedButton(
+        text="Agregar Doctor",
+        on_click=lambda e: agregarDoctor(page)
+    )
+    eliminarDoctorButton = ft.ElevatedButton(
+        text="Eliminar Doctor",
+        # on_click=lambda e: eliminarDoctor(page)
+    )
+    verDoctoresButton = ft.ElevatedButton(
+        text="Ver Doctores",
+    )
+    crearCitasButton = ft.ElevatedButton(
+        text="Crear Citas",
+    )
+    verCitasButton = ft.ElevatedButton(
+        text="Ver Citas",
+    )
+    eliminarCitasButton = ft.ElevatedButton(
+        text="Eliminar Citas",
+    )
+    crearConsultasButton = ft.ElevatedButton(
+        text="Crear Consultas",
+    )
+    verConsultasButton = ft.ElevatedButton(
+        text="Ver Consultas",
+    )
+    eliminarConsultasButton = ft.ElevatedButton(
+        text="Eliminar Consultas",
+    )
+    cerrarSesionButton = ft.ElevatedButton(
+        text="Cerrar Sesion",
+        on_click=lambda e: mainPage(page)
+    )
+
     page.controls = [
-        ft.Column(
+        # Crear dos columnas
+        ft.Row(
             controls=[
-                ft.Text("Menu Admin", size=20),
+                cerrarSesionButton,
+
+                ft.Column(
+                    controls=[
+                        ft.Text("MENU ADMIN", size=20),
+                        agregarDoctorButton,
+                        eliminarDoctorButton,
+                        verDoctoresButton,
+                        crearCitasButton,
+                        verCitasButton,
+                        eliminarCitasButton,
+                        crearConsultasButton,
+                        verConsultasButton,
+                        eliminarConsultasButton,
+                    ],
+                    spacing=20,
+                ),
+                ft.Column(
+                    controls=[
+                        
+                    ],
+                    spacing=20,
+                ),
             ],
+            spacing=50,
+            width = 1000,
         )
     ]
     page.update()
+
+    return page
 
 def menuDoctor(page: ft.Page):
     page.title = "Menu Doctor"

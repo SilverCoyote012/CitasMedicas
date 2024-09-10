@@ -77,8 +77,6 @@ def registerPage(page: ft.Page):
                 ft.Text("¿Ya tienes cuenta?"),
                 login_button,
             ],
-            width=500,
-            spacing=20,
         )
     ]
     page.update()
@@ -92,8 +90,6 @@ def menuAdmin(page: ft.Page):
             controls=[
                 ft.Text("Menu Admin", size=20),
             ],
-            width=400,
-            spacing=20,
         )
     ]
     page.update()
@@ -107,8 +103,6 @@ def menuDoctor(page: ft.Page):
             controls=[
                 ft.Text("Menu Doctor", size=20),
             ],
-            width=400,
-            spacing=20,
         )
     ]
     page.update()
@@ -122,8 +116,6 @@ def menuPaciente(page: ft.Page):
             controls=[
                 ft.Text("Menu Paciente", size=20),
             ],
-            width=400,
-            spacing=20,
         )
     ]
     page.update()

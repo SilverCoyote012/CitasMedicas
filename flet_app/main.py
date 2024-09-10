@@ -65,7 +65,7 @@ def registerPage(page: ft.Page):
         text="Registrarse", 
         on_click=lambda e: on_register_click(page, username.value, password.value, password_confirm.value)
     )
-    login_button = ft.ElevatedButton(text="Iniciar sesión",)
+    login_button = ft.ElevatedButton(text="Iniciar sesión", on_click=lambda e: mainPage(page))
 
     # Alinear en el centro
     page.controls = [
@@ -290,7 +290,6 @@ def mainPage(page: ft.Page):
                     ft.Text("¿No tienes cuenta?"),
                     register_button,
                 ],
-                horizontal_alignment = ft.MainAxisAlignment.CENTER,
                 width=500,
                 spacing=20,
             )

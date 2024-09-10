@@ -1,5 +1,4 @@
 import flet as ft
-import mysql.connector
 
 from utils.conexion import conexionDataBase
 from utils.sesion import set_sesion

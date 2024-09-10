@@ -5,44 +5,50 @@ from utils.sesion import set_sesion
 
 # ====================================================== Funciones ====================================================== #
 def on_login_click(page: ft.Page, username, password):
-    conexion = conexionDataBase()
-    cursor = conexion.cursor()
-    consulta = "SELECT * FROM Usuarios WHERE Correo = %s AND Password = %s"
-    cursor.execute(consulta, (username, password))
-    resultado = cursor.fetchone()
-
-    set_sesion(resultado)
-
-    if resultado:
-        if resultado[3] == 'Paciente':
-            menuPaciente(page)
-            pass
-        elif resultado[3] == 'Doctor':
-            menuDoctor(page)
-            pass
-        elif resultado[3] == 'Admin':
-            menuAdmin(page)
-    else:
-        print("Usuario no registrado")
-
-def on_register_click(page: ft.Page, username, password, password_confirm):
-    if password == password_confirm:
-        # validar si el correo ya está registrado
+    try:
         conexion = conexionDataBase()
         cursor = conexion.cursor()
-        consulta = "SELECT * FROM Usuarios WHERE Correo = %s"
-        cursor.execute(consulta, (username,))
+        consulta = "SELECT * FROM Usuarios WHERE Correo = %s AND Password = %s"
+        cursor.execute(consulta, (username, password))
         resultado = cursor.fetchone()
 
+        set_sesion(resultado)
+
         if resultado:
-            print("El correo ya está registrado")
+            if resultado[3] == 'Paciente':
+                menuPaciente(page)
+                pass
+            elif resultado[3] == 'Doctor':
+                menuDoctor(page)
+                pass
+            elif resultado[3] == 'Admin':
+                menuAdmin(page)
         else:
-            consulta = "INSERT INTO Usuarios (Correo, Password, Rol) VALUES (%s, %s, %s)"
-            cursor.execute(consulta, (username, password, 'Paciente'))
-            conexion.commit()
-            print("Usuario registrado")
+            print("Usuario no registrado")
+    except Exception as e:
+        print("Error: ", e)
+
+def on_register_click(page: ft.Page, username, password, password_confirm):
+    if username and password and password_confirm:
+        if password == password_confirm:
+            # validar si el correo ya está registrado
+            conexion = conexionDataBase()
+            cursor = conexion.cursor()
+            consulta = "SELECT * FROM Usuarios WHERE Correo = %s"
+            cursor.execute(consulta, (username,))
+            resultado = cursor.fetchone()
+
+            if resultado:
+                print("El correo ya está registrado")
+            else:
+                consulta = "INSERT INTO Usuarios (Correo, Password, Rol) VALUES (%s, %s, %s)"
+                cursor.execute(consulta, (username, password, 'Paciente'))
+                conexion.commit()
+                print("Usuario registrado")
+        else:
+            print("Las contraseñas no coinciden")
     else:
-        print("Las contraseñas no coinciden")
+        print("Todos los campos son requeridos")
 
 # ====================================================== Páginas ====================================================== #
 
@@ -153,6 +159,7 @@ def mainPage(page: ft.Page):
                     ft.Text("¿No tienes cuenta?"),
                     register_button,
                 ],
+                horizontal_alignment = ft.MainAxisAlignment.CENTER,
                 width=500,
                 spacing=20,
             )

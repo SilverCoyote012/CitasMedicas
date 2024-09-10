@@ -1,5 +1,4 @@
 import flet as ft
-import os
 
 from utils.conexion import conexionDataBase
 from utils.sesion import set_sesion
@@ -32,7 +31,6 @@ def on_login_click(page: ft.Page, username, password):
 def on_register_click(page: ft.Page, username, password, password_confirm):
     if username and password and password_confirm:
         if password == password_confirm:
-            # validar si el correo ya está registrado
             conexion = conexionDataBase()
             cursor = conexion.cursor()
             consulta = "SELECT * FROM Usuarios WHERE Correo = %s"
@@ -149,7 +147,6 @@ def mainPage(page: ft.Page):
             on_click=lambda e: registerPage(page)
         )
 
-        # Alinear en el centro
         page.controls = [
             ft.Column(
                 controls=[

@@ -233,8 +233,8 @@ class AuthService:
             return []
 
 class App(tk.Tk):
-    def _init_(self):
-        super()._init_()
+    def __init__(self):
+        super().__init__()
         self.title("Clinica Management System")
         self.geometry("600x400")
         self.configure(bg="#f0f0f0")

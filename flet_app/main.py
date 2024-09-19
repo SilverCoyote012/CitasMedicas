@@ -3,7 +3,7 @@ import flet as ft
 from utils.nav import go_to_menu_admin, go_to_menu_doctor, go_to_menu_paciente
 
 from utils.conexion import conexionDataBase
-from utils.sesion import set_sesion, get_sesion, get_correo, get_rol
+from utils.sesion import set_sesion, get_rol
 
 # ====================================================== Funciones ====================================================== #
 def on_login_click(page: ft.Page, username, password):
@@ -64,7 +64,10 @@ def registerPage(page: ft.Page):
         text="Registrarse", 
         on_click=lambda e: on_register_click(page, username.value, password.value, password_confirm.value)
     )
-    login_button = ft.ElevatedButton(text="Iniciar sesión", on_click=lambda e: mainPage(page))
+    login_button = ft.ElevatedButton(
+        text="Iniciar sesión", 
+        on_click=lambda e: mainPage(page)
+    )
 
     # Alinear en el centro
     page.controls = [

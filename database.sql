@@ -61,16 +61,6 @@ CREATE TABLE IF NOT EXISTS DOCTORES (
     FOREIGN KEY (ID_Usuario) REFERENCES USUARIOS(ID_Usuario)
 );
 
-CREATE TABLE IF NOT EXISTS TARJETAS (
-    ID_Tarjeta INTEGER PRIMARY KEY AUTO_INCREMENT,
-    Nombre_Titular VARCHAR(100) NOT NULL,
-    Numero_Tarjeta VARCHAR(100) NOT NULL UNIQUE,
-    Fecha_Expiracion DATE NOT NULL,
-    CVC VARCHAR(100) NOT NULL,
-    ID_Usuario INTEGER NOT NULL,
-    FOREIGN KEY (ID_Usuario) REFERENCES USUARIOS(ID_Usuario)
-);
-
 CREATE TABLE IF NOT EXISTS CITAS (
     ID_Cita INTEGER PRIMARY KEY AUTO_INCREMENT,
     ID_Paciente INTEGER NOT NULL,
@@ -78,11 +68,6 @@ CREATE TABLE IF NOT EXISTS CITAS (
     Fecha DATE NOT NULL,
     Hora TIME NOT NULL,
     Motivo VARCHAR(100) NOT NULL,
-    Doctor_Especialidad VARCHAR(100) NOT NULL,
-    Estado VARCHAR(20) NOT NULL,
-    Precio INTEGER NOT NULL,
-    ID_Tarjeta INTEGER NOT NULL,
-    FOREIGN KEY (ID_Tarjeta) REFERENCES TARJETAS(ID_Tarjeta),
     FOREIGN KEY (ID_Paciente) REFERENCES PACIENTES(ID_Paciente),
     FOREIGN KEY (ID_Doctor) REFERENCES DOCTORES(ID_Doctor)
 );
@@ -167,6 +152,29 @@ INSERT INTO PACIENTES (Nombre, Apellido, Fecha_Nacimiento, Sexo, Telefono, ID_Di
 ('Gustavo', 'Pérez', '1991-05-29', 'Masculino', '555-5152', 14, 29),
 ('Natalia', 'Hernández', '1987-06-30', 'Femenino', '555-5354', 15, 30);
 
+-- Inserción de 30 registros en la tabla ESPECIALIDADES
+INSERT INTO ESPECIALIDADES (Especialidad) VALUES
+('Cardiología'),
+('Dermatología'),
+('Endocrinología'),
+('Gastroenterología'),
+('Geriatría'),
+('Ginecología'),
+('Hematología'),
+('Infectología'),
+('Medicina interna'),
+('Nefrología'),
+('Neumología'),
+('Neurología'),
+('Nutriología'),
+('Oftalmología'),
+('Oncología'),
+('Otorrinolaringología'),
+('Pediatría'),
+('Psiquiatría'),
+('Reumatología'),
+('Traumatología');
+
 -- Inserción de 30 registros en la tabla DOMICILIO_DOCTORES
 INSERT INTO DOMICILIO_DOCTORES (Calle, Numero_Domicilio, Codigo_Postal, Colonia, Ciudad, Estado, Pais) VALUES
 ('Calle A', '101', '20000', 'Colonia A', 'Ciudad A', 'Estado A', 'Pais A'),
@@ -186,22 +194,22 @@ INSERT INTO DOMICILIO_DOCTORES (Calle, Numero_Domicilio, Codigo_Postal, Colonia,
 ('Calle O', '1515', '20014', 'Colonia O', 'Ciudad O', 'Estado O', 'Pais O');
 
 -- Inserción de 30 registros en la tabla DOCTORES
-INSERT INTO DOCTORES (Nombre, Apellido, Telefono, ID_Direccion, ID_Usuario) VALUES
-('Dr. Juan', 'Martínez', '555-0011', 1, 1),
-('Dr. Ana', 'García', '555-0022', 2, 2),
-('Dr. Luis', 'Pérez', '555-0033', 3, 3),
-('Dr. Carlos', 'Hernández', '555-0044', 4, 4),
-('Dr. Laura', 'López', '555-0055', 5, 5),
-('Dr. Roberto', 'Díaz', '555-0066', 6, 6),
-('Dr. Sofía', 'Méndez', '555-0077', 7, 7),
-('Dr. José', 'Fernández', '555-0088', 8, 8),
-('Dr. Elena', 'Ruiz', '555-0099', 9, 9),
-('Dr. Jorge', 'Jiménez', '555-0101', 10, 10),
-('Dr. Claudia', 'Morales', '555-0112', 11, 11),
-('Dr. Miguel', 'Ortiz', '555-0123', 12, 12),
-('Dr. Patricia', 'García', '555-0134', 13, 13),
-('Dr. Francisco', 'Castillo', '555-0145', 14, 14),
-('Dr. Gabriela', 'Romero', '555-0156', 15, 15);
+INSERT INTO DOCTORES (Nombre, Apellido, Telefono, ID_Especialidad, ID_Direccion, ID_Usuario) VALUES
+('Dr. Juan', 'Martínez', '555-0011', 1, 1, 1),
+('Dr. Ana', 'García', '555-0022', 2, 2, 2),
+('Dr. Luis', 'Pérez', '555-0033', 3, 3, 3),
+('Dr. Carlos', 'Hernández', '555-0044', 4, 4, 4),
+('Dr. Laura', 'López', '555-0055', 5, 5, 5),
+('Dr. Roberto', 'Díaz', '555-0066', 6, 6, 6),
+('Dr. Sofía', 'Méndez', '555-0077', 7, 7, 7),
+('Dr. José', 'Fernández', '555-0088', 8, 8, 8),
+('Dr. Elena', 'Ruiz', '555-0099', 9, 9, 9),
+('Dr. Jorge', 'Jiménez', '555-0101', 10, 10, 10),
+('Dr. Claudia', 'Morales', '555-0112', 11, 11, 11),
+('Dr. Miguel', 'Ortiz', '555-0123', 12, 12, 12),
+('Dr. Patricia', 'García', '555-0134', 13, 13, 13),
+('Dr. Francisco', 'Castillo', '555-0145', 14, 14, 14),
+('Dr. Gabriela', 'Romero', '555-0156', 15, 15, 15);
 
 -- Inserción de 30 registros en la tabla CITAS
 INSERT INTO CITAS (ID_Paciente, ID_Doctor, Fecha, Hora, Motivo) VALUES

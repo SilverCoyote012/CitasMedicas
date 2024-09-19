@@ -1,6 +1,6 @@
 import flet as ft
 
-# from main import mainPage
+from utils.nav import go_to_main_page
 
 def agregarDoctor(page: ft.Page):
     page.controls[0].controls[2].controls = [
@@ -19,7 +19,7 @@ def agregarDoctor(page: ft.Page):
         ft.TextField(label="País", width=500),
         ft.ElevatedButton(
             text="Agregar Doctor",
-            # on_click=lambda e: mainPage(page)
+            on_click=lambda e: go_to_main_page(page)
         ),
     ]
     page.update()

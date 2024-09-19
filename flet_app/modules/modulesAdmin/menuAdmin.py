@@ -2,6 +2,8 @@ import flet as ft
 
 from modules.modulesAdmin.funcionesAdmin import agregarDoctor
 
+from utils.nav import go_to_main_page
+
 def menuAdmin(page: ft.Page):
     page.title = "Menu Admin"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
@@ -37,7 +39,7 @@ def menuAdmin(page: ft.Page):
     )
     cerrarSesionButton = ft.ElevatedButton(
         text="Cerrar Sesion",
-        # on_click=lambda e: mainPage(page)
+        on_click=lambda e: go_to_main_page(page)
     )
 
     page.controls = [

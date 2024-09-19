@@ -1,8 +1,6 @@
 import flet as ft
 
-from modules.modulesAdmin.menuAdmin import menuAdmin
-from modules.modulesDoctor.menuDoctor import menuDoctor
-from modules.modulesPatient.menuPaciente import menuPaciente
+from utils.nav import go_to_menu_admin, go_to_menu_doctor, go_to_menu_paciente
 
 from utils.conexion import conexionDataBase
 from utils.sesion import set_sesion, get_sesion, get_correo, get_rol
@@ -20,11 +18,11 @@ def on_login_click(page: ft.Page, username, password):
 
         if resultado:
             if get_rol() == "Admin":
-                menuAdmin(page)
+                go_to_menu_admin(page)
             elif get_rol() == "Doctor":
-                menuDoctor(page)
+                go_to_menu_doctor(page)
             elif get_rol() == "Paciente":
-                menuPaciente(page)
+                go_to_menu_paciente(page)
         else:
             print("Usuario no registrado")
     except Exception as e:

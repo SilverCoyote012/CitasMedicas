@@ -1,20 +1,35 @@
-sesion_actual = None
+id = None
 correo = None
+password = None
 rol = None
 
 def set_sesion(sesion):
-    global sesion_actual
+    global id
     global correo
+    global password
     global rol
-    sesion_actual = sesion
+
+    id = sesion[0]
     correo = sesion[1]
-    rol = sesion[2]
+    password = sesion[2]
+    rol = sesion[3]
 
 def get_sesion():
-    return sesion_actual
+    return id, correo, password, rol
 
 def get_correo():
     return correo
 
 def get_rol():
     return rol
+
+def clear_sesion():
+    global id
+    global correo
+    global password
+    global rol
+
+    id = None
+    correo = None
+    password = None
+    rol = None

@@ -195,21 +195,22 @@ INSERT INTO DOMICILIO_DOCTORES (Calle, Numero_Domicilio, Codigo_Postal, Colonia,
 
 -- Inserción de 30 registros en la tabla DOCTORES
 INSERT INTO DOCTORES (Nombre, Apellido, Telefono, ID_Especialidad, ID_Direccion, ID_Usuario) VALUES
-('Dr. Juan', 'Martínez', '555-0011', 1, 1, 1),
-('Dr. Ana', 'García', '555-0022', 2, 2, 2),
-('Dr. Luis', 'Pérez', '555-0033', 3, 3, 3),
-('Dr. Carlos', 'Hernández', '555-0044', 4, 4, 4),
-('Dr. Laura', 'López', '555-0055', 5, 5, 5),
-('Dr. Roberto', 'Díaz', '555-0066', 6, 6, 6),
-('Dr. Sofía', 'Méndez', '555-0077', 7, 7, 7),
-('Dr. José', 'Fernández', '555-0088', 8, 8, 8),
-('Dr. Elena', 'Ruiz', '555-0099', 9, 9, 9),
-('Dr. Jorge', 'Jiménez', '555-0101', 10, 10, 10),
-('Dr. Claudia', 'Morales', '555-0112', 11, 11, 11),
-('Dr. Miguel', 'Ortiz', '555-0123', 12, 12, 12),
-('Dr. Patricia', 'García', '555-0134', 13, 13, 13),
-('Dr. Francisco', 'Castillo', '555-0145', 14, 14, 14),
-('Dr. Gabriela', 'Romero', '555-0156', 15, 15, 15);
+('José', 'García', '555-2526', 1, 1, 1),
+('María', 'Martínez', '555-2728', 2, 2, 2),
+('Carlos', 'Hernández', '555-2930', 3, 3, 3),
+('Ana', 'López', '555-3132', 4, 4, 4),
+('Jorge', 'González', '555-3334', 5, 5, 5),
+('Laura', 'Pérez', '555-3536', 6, 6, 6),
+('Francisco', 'Rodríguez', '555-3738', 7, 7, 7),
+('Sofía', 'Sánchez', '555-3940', 8, 8, 8),
+('Manuel', 'Ramírez', '555-4142', 9, 9, 9),
+('Patricia', 'Torres', '555-4344', 10, 10, 10),
+('Ricardo', 'Flores', '555-4546', 11, 11, 11),
+('Diana', 'Vázquez', '555-4748', 12, 12, 12),
+('Alejandro', 'Gómez', '555-4950', 13, 13, 13),
+('Verónica', 'Jiménez', '555-5152', 14, 14, 14),
+('Roberto', 'Mendoza', '555-5354', 15, 15, 15);
+
 
 -- Inserción de 30 registros en la tabla CITAS
 INSERT INTO CITAS (ID_Paciente, ID_Doctor, Fecha, Hora, Motivo) VALUES

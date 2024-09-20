@@ -1,8 +1,9 @@
 import flet as ft
 
 from utils.nav import go_to_menu_admin
+from utils.conexion import conexionDataBase
 
-from modules.dataBaseInfo.addData import agregarUsuario, agregarDoctor, agregarDomicilioDoctor
+from modules.dataBaseInfo.addData import agregarUsuarioDB, agregarDoctorDB, agregarDomicilioDoctorDB
 
 def agregarDoctor(page: ft.Page):
     correo = ft.TextField(label="Correo", width=500)
@@ -11,7 +12,28 @@ def agregarDoctor(page: ft.Page):
     nombre = ft.TextField(label="Nombre", width=500)
     apellido = ft.TextField(label="Apellido", width=500)
     telefono = ft.TextField(label="Teléfono", width=500)
-    especialidad = ft.TextField(label="Especialidad", width=500)
+
+    def buscarEspecialidades():
+        try:
+            conexion = conexionDataBase()
+            cursor = conexion.cursor()
+            consulta = "SELECT * FROM Especialidades"
+            cursor.execute(consulta)
+            resultado = cursor.fetchall()
+            
+            especialidades = []
+            for especialidad in resultado:
+                especialidades.append(especialidad[1])
+            return especialidades
+        except Exception as e:
+            print("Error: ", e)
+            return []
+    
+    especialidad = ft.Dropdown(
+        label="Especialidad",
+        options=[ft.dropdown.Option(text=especialidad) for especialidad in buscarEspecialidades()],
+        width=500
+    )
 
     calle = ft.TextField(label="Calle", width=500)
     numero = ft.TextField(label="Número", width=500)
@@ -39,9 +61,12 @@ def agregarDoctor(page: ft.Page):
         ft.ElevatedButton(
             text="Agregar Doctor",
             on_click=lambda e: [
-                usuario_id := agregarUsuario(correo.value, password.value, "Doctor"),
-                id_direccion := agregarDomicilioDoctor(calle.value, numero.value, codigoPostal.value, colonia.value, ciudad.value, estado.value, pais.value),
-                agregarDoctor(nombre.value, apellido.value, telefono.value, especialidad.value, id_direccion, usuario_id),
+                print(especialidad.value),
+                usuario_id := agregarUsuarioDB(correo.value, password.value, "Doctor"),
+                id_direccion := agregarDomicilioDoctorDB(calle.value, numero.value, codigoPostal.value, colonia.value, ciudad.value, estado.value, pais.value),
+                print(usuario_id),
+                print(id_direccion),
+                agregarDoctorDB(nombre.value, apellido.value, telefono.value, especialidad.value, id_direccion, usuario_id),
                 go_to_menu_admin(page)
             ]
         ),

@@ -1,6 +1,6 @@
 import flet as ft
 
-from modules.modulesAdmin.funcionesAdmin import agregarDoctor
+from modules.modulesAdmin.funcionesAdmin import agregarDoctor, eliminarDoctor
 
 from utils.nav import go_to_main_page
 
@@ -14,7 +14,7 @@ def menuAdmin(page: ft.Page):
     )
     eliminarDoctorButton = ft.ElevatedButton(
         text="Eliminar Doctor",
-        # on_click=lambda e: eliminarDoctor(page)
+        on_click=lambda e: eliminarDoctor(page)
     )
     verDoctoresButton = ft.ElevatedButton(
         text="Ver Doctores",

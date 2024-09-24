@@ -23,6 +23,8 @@ def agregarDoctor(page: ft.Page):
             consulta = "SELECT * FROM Especialidades"
             cursor.execute(consulta)
             resultado = cursor.fetchall()
+            cursor.close()
+            conexion.close()
             
             especialidades = []
             for especialidad in resultado:

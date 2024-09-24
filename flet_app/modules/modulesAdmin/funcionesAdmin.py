@@ -1,5 +1,7 @@
 import flet as ft
 
+import os
+
 from utils.nav import go_to_menu_admin
 from utils.conexion import conexionDataBase
 
@@ -150,21 +152,10 @@ def eliminarDoctor(page: ft.Page):
         ft.Text("Eliminar Doctor", size=20),
         tabla_con_scroll,
         id_doctor,
-<<<<<<< HEAD
         ft.Row(
             controls=[
                 button,
                 buttonCancelar,
-=======
-        # Agrupando los botones
-        ft.Row(
-            controls=[
-                button,
-                ft.ElevatedButton(
-                    text="Cancelar",
-                    on_click=lambda e: go_to_menu_admin(page),
-                ),
->>>>>>> 6b044bcf6263065ffe4d424fa671be7b01b24b38
             ],
         ),
     ]

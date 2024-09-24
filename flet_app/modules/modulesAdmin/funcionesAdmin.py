@@ -102,7 +102,6 @@ def eliminarDoctor(page: ft.Page):
             print("Error: ", e)
             return []
 
-    # Creando las filas para la tabla
     filas_doctores = [
         ft.DataRow(
             cells=[
@@ -151,13 +150,86 @@ def eliminarDoctor(page: ft.Page):
         ft.Text("Eliminar Doctor", size=20),
         tabla_con_scroll,
         id_doctor,
+<<<<<<< HEAD
         ft.Row(
             controls=[
                 button,
                 buttonCancelar,
+=======
+        # Agrupando los botones
+        ft.Row(
+            controls=[
+                button,
+                ft.ElevatedButton(
+                    text="Cancelar",
+                    on_click=lambda e: go_to_menu_admin(page),
+                ),
+>>>>>>> 6b044bcf6263065ffe4d424fa671be7b01b24b38
             ],
         ),
     ]
 
     page.update()
 
+def verDoctores(page: ft.Page):
+    def buscarDoctores():
+        try:
+            conexion = conexionDataBase()
+            cursor = conexion.cursor()
+            consulta = "SELECT * FROM Doctores"
+            cursor.execute(consulta)
+            resultado = cursor.fetchall()
+            
+            doctores = []
+            for doctor in resultado:
+                doctores.append(doctor)
+            return doctores
+        except Exception as e:
+            print("Error: ", e)
+            return []
+
+    filas_doctores = [
+        ft.DataRow(
+            cells=[
+                ft.DataCell(ft.Text(str(doctor[0]))),
+                ft.DataCell(ft.Text(doctor[1])),
+                ft.DataCell(ft.Text(doctor[2])),
+                ft.DataCell(ft.Text(doctor[3])),
+            ]
+        )
+        for doctor in buscarDoctores()
+    ]
+
+    doctores = ft.DataTable(
+        columns=[
+            ft.DataColumn(ft.Text("ID"), numeric=True),
+            ft.DataColumn(ft.Text("Nombre")),
+            ft.DataColumn(ft.Text("Teléfono")),
+            ft.DataColumn(ft.Text("Especialidad")),
+        ],
+        rows=filas_doctores,
+    )
+
+    tabla_con_scroll = ft.Container(
+        content=ft.ListView(
+            controls=[doctores],
+            expand=True,
+        ),
+        width=600,
+        height=400,
+    )
+
+    page.controls[0].controls[2].controls = [
+        ft.Text("Ver Doctores", size=20),
+        tabla_con_scroll,
+        ft.Row(
+            controls=[
+                ft.ElevatedButton(
+                    text="Volver",
+                    on_click=lambda e: go_to_menu_admin(page),
+                ),
+            ],
+        ),
+    ]
+
+    page.update()

@@ -43,7 +43,6 @@ def menuAdmin(page: ft.Page):
     )
 
     page.controls = [
-        # Crear dos columnas
         ft.Row(
             controls=[
                 cerrarSesionButton,
@@ -65,7 +64,14 @@ def menuAdmin(page: ft.Page):
                 ),
                 ft.Column(
                     controls=[
-                        
+                        ft.Container(
+                            content=ft.ListView(
+                                controls=[],
+                                expand=True,
+                            ),
+                            width=600,
+                            height=100,
+                        ),
                     ],
                     spacing=20,
                 ),

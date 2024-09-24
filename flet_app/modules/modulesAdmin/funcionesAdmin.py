@@ -59,17 +59,26 @@ def agregarDoctor(page: ft.Page):
         ciudad,
         estado,
         pais,
-        ft.ElevatedButton(
-            text="Agregar Doctor",
-            on_click=lambda e: [
-                print(especialidad.value),
-                usuario_id := agregarUsuarioDB(correo.value, password.value, "Doctor"),
-                id_direccion := agregarDomicilioDoctorDB(calle.value, numero.value, codigoPostal.value, colonia.value, ciudad.value, estado.value, pais.value),
-                print(usuario_id),
-                print(id_direccion),
-                agregarDoctorDB(nombre.value, apellido.value, telefono.value, especialidad.value, id_direccion, usuario_id),
-                go_to_menu_admin(page)
-            ]
+        # colocar dos botones en la misma fila
+        ft.Row(
+            controls=[
+                ft.ElevatedButton(
+                    text="Agregar Doctor",
+                    on_click=lambda e: [
+                        print(especialidad.value),
+                        usuario_id := agregarUsuarioDB(correo.value, password.value, "Doctor"),
+                        id_direccion := agregarDomicilioDoctorDB(calle.value, numero.value, codigoPostal.value, colonia.value, ciudad.value, estado.value, pais.value),
+                        print(usuario_id),
+                        print(id_direccion),
+                        agregarDoctorDB(nombre.value, apellido.value, telefono.value, especialidad.value, id_direccion, usuario_id),
+                        go_to_menu_admin(page)
+                    ]
+                ),
+                ft.ElevatedButton(
+                    text="Cancelar",
+                    on_click=lambda e: go_to_menu_admin(page)
+                ),
+            ],
         ),
     ]
 
@@ -133,12 +142,21 @@ def eliminarDoctor(page: ft.Page):
             go_to_menu_admin(page),
         ]
     )
+    buttonCancelar = ft.ElevatedButton(
+        text="Cancelar",
+        on_click=lambda e: go_to_menu_admin(page)
+    )
 
     page.controls[0].controls[2].controls = [
         ft.Text("Eliminar Doctor", size=20),
         tabla_con_scroll,
         id_doctor,
-        button,
+        ft.Row(
+            controls=[
+                button,
+                buttonCancelar,
+            ],
+        ),
     ]
 
     page.update()
